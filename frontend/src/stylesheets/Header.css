@@ -1,0 +1,8 @@
+.App-header h2,
+.App-header h1{
+    cursor: pointer;
+}
+.App-header h2:hover,
+.App-header h1:hover{
+    color:dodgerblue;
+}
