@@ -432,5 +432,5 @@ This endpoint either creates a new question or returns search results.
 
 ## Authors
 
-Mohamed Saad authored the API (`__init__.py`), test suite (`test_flaskr.py`), and this README.<br>
+Mohamed Saad authored the API (`__init__.py`), test suite (`test_flaskr.py`).<br>
 All other project files, including the models and frontend, were created by [Udacity](https://www.udacity.com/) as a project template for the [Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044).
