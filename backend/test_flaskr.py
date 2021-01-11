@@ -59,7 +59,6 @@ class TriviaTestCase(unittest.TestCase):
                             category=self.new_question['category'], difficulty=self.new_question['difficulty'])
         question.insert()
 
-        # get the id of the new question
         q_id = question.id
         res = self.client().delete('/questions/{}'.format(q_id))
         data = json.loads(res.data)
@@ -100,7 +99,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(data['totalQuestions'])
 
     def test_get_questions_by_categore(self):
-        res = self.client().get('/categories/0/questions')
+        res = self.client().get('/categories/2/questions')
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code,200)
@@ -116,42 +115,22 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'],False)
         self.assertEqual(data['message'],"Bad Request")
 
-    def test_play_quiz_game(self):
-        """Tests playing quiz game success"""
+    def test_play(self):
+        res = self.client().post('/quizzes',json={'previous_questions': [20, 21],'quiz_category': {'type': 'Science', 'id': '1'}})
+        data = json.loads(res.data)
 
-        # send post request with category and previous questions
-        response = self.client().post('/quizzes',
-                                      json={'previous_questions': [20, 21],
-                                            'quiz_category': {'type': 'Science', 'id': '1'}})
-
-        # load response data
-        data = json.loads(response.data)
-
-        # check response status code and message
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-
-        # check that a question is returned
         self.assertTrue(data['question'])
-
-        # check that the question returned is in correct category
         self.assertEqual(data['question']['category'], 1)
-
-        # check that question returned is not on previous q list
         self.assertNotEqual(data['question']['id'], 20)
         self.assertNotEqual(data['question']['id'], 21)
 
-    def test_play_quiz_fails(self):
-        """Tests playing quiz game failure 400"""
+    def test_400_play_fail(self):
+        res = self.client().post('/quizzes', json={})
+        data = json.loads(res.data)
 
-        # send post request without json data
-        response = self.client().post('/quizzes', json={})
-
-        # load response data
-        data = json.loads(response.data)
-
-        # check response status code and message
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(res.status_code, 400)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'Bad Request')
 

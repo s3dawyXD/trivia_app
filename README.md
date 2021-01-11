@@ -1,34 +1,32 @@
-# Full Stack Trivia API Project
-This project is a game where users can test their knowledge answering trivia questions. The task for the project was to create an API and test suite for implementing the following functionality:
-
-1) Display questions - both all questions and by category. Questions should show the question, category and difficulty rating by default and can show/hide the answer. 
-2) Delete questions.
-3) Add questions and require that they include question and answer text.
-4) Search for questions based on a text query string.
-5) Play the quiz game, randomizing either all questions or within a specific category. 
+# Trivia API Project
+this app is a game website where you can test your knowlege and challenge your frinds,
+you also can :
+1. add question
+2. delete question
+3. play the game with random questions 
 
 ## Getting Started
 
-### Installing Dependencies
-Developers using this project should already have Python3, pip, node, and npm installed.
+### Installation
+To run this project make sure Python3, pip, node, and npm are installed.
 
-#### Frontend Dependencies
+#### Frontend Installation
 
-This project uses NPM to manage software dependencies. NPM Relies on the package.json file located in the `frontend` directory of this repository. After cloning, open your terminal and run:
+this project use's Reactjs for frontend after clonning go to `/frontend` open your terminal and run:
 
 ```bash
 npm install
 ```
 
-#### Backend Dependencies
+#### Backend Installation
 
-Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
+we used python Flask micro framework for the backend , go to `/backend` and run:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Running the Frontend in Dev Mode
+## Starting the project
 
 The frontend app was built using create-react-app. In order to run the app in development mode use ```npm start```. You can change the script in the ```package.json``` file. 
 
@@ -39,8 +37,6 @@ npm start
 ```
 
 ## Running the Server
-
-From within the `backend` directory first ensure you are working using your created virtual environment.
 
 To run the server, execute:
 
@@ -53,19 +49,15 @@ flask run
 ## Testing
 To run the tests, run
 ```
-dropdb trivia_test
-createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
 ```
-Omit the dropdb command the first time you run tests.
 
 ## API Reference
 
 ### Getting Started
 
-* Base URL: Currently this application is only hosted locally. The backend is hosted at `http://127.0.0.1:5000/`
-* Authentication: This version does not require authentication or API keys.
+* Base URL: `http://127.0.0.1:5000/`
 
 ### Error Handling
 
@@ -106,9 +98,7 @@ The API will return three types of errors:
 #### GET /questions
 
 * General:
-  * Returns a list questions.
-  * Results are paginated in groups of 10.
-  * Also returns list of categories and total number of questions.
+  * Returns a list of pagenated questions.
 * Sample: `curl http://127.0.0.1:5000/questions`<br>
 
         {
@@ -196,21 +186,20 @@ The API will return three types of errors:
             "total_questions": 19
         }
 
-#### DELETE /questions/\<int:id\>
+#### DELETE /questions/<int:id>
 
 * General:
   * Deletes a question by id using url parameters.
-  * Returns id of deleted question upon success.
+  
 * Sample: `curl http://127.0.0.1:5000/questions/6 -X DELETE`<br>
 
         {
-            "deleted": 6, 
             "success": true
         }
 
 #### POST /questions
 
-This endpoint either creates a new question or returns search results.
+for search or add new question
 
 1. If <strong>no</strong> search term is included in request:
 
@@ -309,7 +298,7 @@ This endpoint either creates a new question or returns search results.
 * General:
   * Searches for questions using search term in JSON request parameters.
   * Returns JSON object with paginated matching questions.
-* Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm": "which"}'`<br>
+* Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm": "who"}'`<br>
 
         {
             "questions": [
@@ -374,11 +363,10 @@ This endpoint either creates a new question or returns search results.
             "total_questions": 18
         }
 
-#### GET /categories/\<int:id\>/questions
+#### GET /categories/<int:id>/questions
 
 * General:
   * Gets questions by category id using url parameters.
-  * Returns JSON object with paginated matching questions.
 * Sample: `curl http://127.0.0.1:5000/categories/1/questions`<br>
 
         {
@@ -413,9 +401,7 @@ This endpoint either creates a new question or returns search results.
 #### POST /quizzes
 
 * General:
-  * Allows users to play the quiz game.
-  * Uses JSON request parameters of category and previous questions.
-  * Returns JSON object with random question not among previous questions.
+    * Returns JSON object with random question not among previous questions.
 * Sample: `curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [20, 21],
                                             "quiz_category": {"type": "Science", "id": "1"}}'`<br>
 
@@ -433,4 +419,3 @@ This endpoint either creates a new question or returns search results.
 ## Authors
 
 Mohamed Saad authored the API (`__init__.py`), test suite (`test_flaskr.py`).<br>
-All other project files, including the models and frontend, were created by [Udacity](https://www.udacity.com/) as a project template for the [Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044).
