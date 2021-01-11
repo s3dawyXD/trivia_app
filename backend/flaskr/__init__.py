@@ -203,7 +203,7 @@ def create_app(test_config=None):
     if(category is None):
       abort(400)
     else :
-      questions = Question.query.filter_by(category = category.id).all()
+      questions = Question.query.filter_by(category = category).all()
       paginated = paginate_questions(request,questions)
       return jsonify({
         'success': True,
